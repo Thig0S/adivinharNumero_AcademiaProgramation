@@ -1,32 +1,82 @@
 ﻿using System.ComponentModel;
 using System.Security.Cryptography;
 
-int numAleatorio = RandomNumberGenerator.GetInt32(1,101);
-int numeroUsuario = 0;
-// int dificuldade = 0;
+    while (true) //while pro jogador digitar a dificuldade certa
+    {
+    int numeroUsuario = 0;
+    string? escolherdificuldade;
+    int numDificuldade;
+    int tentativas;
+    Console.Clear();
 
-System.Console.WriteLine("--------------------");
-System.Console.WriteLine("Bem-vindo ao Jogo de adivinhacao!");
-System.Console.WriteLine("--------------------");
+    System.Console.WriteLine("--------------------");
+    System.Console.WriteLine("Bem-vindo ao Jogo de adivinhacao!");
+    System.Console.WriteLine("--------------------");
 
-while (true)
-{
-System.Console.Write("\nDigite um numero: ");
-numeroUsuario = Convert.ToInt32(Console.ReadLine());
+    while(true){
+    System.Console.WriteLine("\nSelecione a dificuldade do jogo: ");
+    System.Console.WriteLine("1 - Numero aleatorio ate 20 - 10 TENTATIVAS!");
+    System.Console.WriteLine("2 - Numero aleatorio ate 50 - 5 TENTATIVAS!");
+    System.Console.WriteLine("3 - Numero aleatorio ate 100 - 3 TENTATIVAS!");
+    System.Console.Write("Dificuldade: ");
 
-    if(numAleatorio == numeroUsuario)
+    escolherdificuldade = Console.ReadLine();
+
+        switch(escolherdificuldade)
         {
-            System.Console.WriteLine("parabens voce acertou o numero!");
+            case "1":
+                numDificuldade = 20;
+                tentativas = 10;
             break;
-        }    
-    else if(numeroUsuario < numAleatorio)
-        {
-            System.Console.WriteLine("Numero digitado e MENOR!");
+            case "2":
+                numDificuldade = 50;
+                tentativas = 5;
+                break;
+            case "3":
+                numDificuldade = 100;
+                tentativas = 3;
+                break;
+            default:
+            Console.Clear();
+            System.Console.WriteLine("\nDigite um numero VALIDO!\n");
+            continue;
         }
-    else
-        {
-            System.Console.WriteLine("Numero digitado e MAIOR");        
-        }
-}
-System.Console.WriteLine("Obrigado por jogar!");
+        break;
+    }
+    Console.Clear();
+       int numAleatorio = RandomNumberGenerator.GetInt32(1,numDificuldade);
+    for (int i = 1; i <= tentativas; i ++)
+    {
+    System.Console.WriteLine($"\nTENTATIVA {i} de {tentativas}*");
+    System.Console.WriteLine("------------------");
 
+    System.Console.Write($"\nDigite um numero de ate {numDificuldade}: ");
+    numeroUsuario = Convert.ToInt32(Console.ReadLine());
+
+        if(numAleatorio == numeroUsuario)
+            {
+                System.Console.WriteLine("PARABENS voce acertou o numero!");
+            }    
+        else if(numeroUsuario < numAleatorio)
+            {
+                System.Console.WriteLine("Numero digitado e MENOR!");
+                continue;
+            }
+        else
+            {
+                System.Console.WriteLine("Numero digitado e MAIOR");        
+                continue;
+            }     
+        break;
+    }
+    if(numAleatorio != numeroUsuario)
+    {
+        System.Console.WriteLine($"\nGAME OVER suas tentativas acabaram o numero secreto era: {numAleatorio}");
+    }
+    System.Console.Write("\nDeseja jogar novamente? (S/N)");
+    if(Console.ReadLine() != "s")
+        {
+            break;
+        }
+    }
+    System.Console.WriteLine("Obrigado por jogar!");
