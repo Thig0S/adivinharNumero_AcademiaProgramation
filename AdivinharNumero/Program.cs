@@ -131,7 +131,7 @@ class Program
             {
                 Console.WriteLine("------------------------------------");
                 Console.WriteLine("Você já digitou esse número, tente novamente.");
-                Console.WriteLine("------------------------------------");
+                    Console.WriteLine("------------------------------------");
                 Console.Write("Digite ENTER para continuar...");
                 Console.ReadLine();
 
